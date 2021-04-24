@@ -5,9 +5,7 @@ import datetime
 import wikipedia
 import webbrowser
 import os
-import shutil
-import pywintypes
-from win10toast import ToastNotifier
+
 
 chrome_path = "C:/Program Files/Google/Chrome/Application/chrome.exe %s" 
 
