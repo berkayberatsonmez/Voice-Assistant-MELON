@@ -142,12 +142,7 @@ if __name__ == "__main__":
       
        elif 'melon' in query:
            speak('sir')
-      
-       elif 'league of legends' in query:
-           speak("league of legends is opening")
-           lolPath  = "C:\\Riot Games\\League of Legends\\LeagueClient.exe"
-           os.startfile(lolPath)
-      
+        
        elif 'how are you' in query:
            speak('I am fine sir , how are you')
        
@@ -198,9 +193,6 @@ if __name__ == "__main__":
        elif 'goodbye' in query:
            speak('Goodbye sir')
            break;
-      
-       elif 'i love you' in query:
-           speak('I love you too sir')
       
        elif 'what\'s your name' in query:
            speak("My name is melon sir")
@@ -257,11 +249,7 @@ if __name__ == "__main__":
             speak("I have already ready sir")        
        
        elif 'open translate' in query:
-            webbrowser.get(chrome_path).open("https://translate.google.com/")
-      
-       elif 'when file change' in query:
-            changetime = datetime.datetime.fromtimestamp(os.stat(query).st_mtime)
-            speak("file change:" + datetime.datetime.strftime(changetime, '%c'))
+            webbrowser.get(chrome_path).open("https://translate.google.com/")  
       
        elif 'system info' in query:
             speak('OS Name is: {0}'.format(os_name))
