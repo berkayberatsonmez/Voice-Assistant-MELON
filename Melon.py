@@ -1,3 +1,4 @@
+#-------This Code written by BBS-------#
 import pyttsx3
 import speech_recognition as sr
 import pyaudio
@@ -10,8 +11,18 @@ import smtplib
 import platform,re,json,psutil
 import wmi
 import time
+import getpass
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
+import pyautogui
+from subprocess import call
 
-base= "C:\\Users\\berka\\OneDrive\\Masaüstü\\changefilename"
+base= "C:\\Users\\berka\\OneDrive\\Masaüstü\\melonfiles"
+
+file="C:\\Users\\berka\\OneDrive\\Masaüstü\\Masaüstü\\melon\\melon.py"
 
 computer = wmi.WMI()
 computer_info = computer.Win32_ComputerSystem()[0]
@@ -52,11 +63,10 @@ def wishMe():
     hour = int(datetime.datetime.now().hour)
     if hour>= 6 and hour<12:
         speak("Good Morning ")
-
     elif hour>=12 and hour<18:
             speak("Good Afternoon ")
     elif hour>=18 and hour<24:
-            speak("Good Afternoon ")
+            speak("Good evening ")
     else:
                 speak("Good Night ")
 
@@ -72,7 +82,7 @@ def wishMe():
     else:
         speak("The weather is hot and nice today, be careful, don't sweat too much ")
 
-    speak("well, what can I do for you sir?")
+    speak("When you need me, just say melon sir")
 
 def takeCommand():
         r = sr.Recognizer()
@@ -87,128 +97,138 @@ def takeCommand():
                 print(query)
             except Exception as e:
                 print("say that again please..")
-                speak("Sorry I couldn't understand. Can you please repeat sir?")
                 return "none"
             return query
 
-if __name__ == "__main__":
+
+if __name__ == "__main__":      # melon commands are here. You can write whatever you want to do to melon.
    wishMe()
 
    while True:
 
-       query = takeCommand().lower()
-
-       if 'wikipedia' in query:
+    query = takeCommand().lower()
+    if 'melon' in query:
+       speak("How can ı help you sir")
+       while True:
+        query = takeCommand().lower()
+        if 'wikipedia' in query:
            speak('Searching Wikipedia...')
            query = query.replace("wikipedia","")
            results = wikipedia.summary(query, sentences=2)
-           webbrowser.get(chrome_path).open("https://tr.wikipedia.org/wiki/" + query)
+           webbrowser.get(chrome_path).open("https://en.wikipedia.org/wiki/" + query)
            speak("According to Wikipedia")
            print(results)
            speak(results)
 
-       elif 'open youtube' in query:
+        elif 'open youtube' in query:
            webbrowser.get(chrome_path).open("youtube.com")
 
-       elif 'open google' in query:
+        elif 'open google' in query:
            webbrowser.get(chrome_path).open("google.com")
 
-       elif 'who are you' in query:
+        elif 'who are you' in query:
            speak('You already know who I am sir')
 
-       elif 'what is time' in query:
+        elif 'what is time' in query:
            strTime = datetime.datetime.now().strftime("%H:%M:%S")
            print(strTime)
            speak(strTime + "o'clock")
        
-       elif "what's time" in query:
+        elif "what's time" in query:
            strTime = datetime.datetime.now().strftime("%H:%M:%S")
            print(strTime)
            speak(strTime + "o'clock")
        
-       elif 'what is the time' in query:
+        elif 'what is the time' in query:
            strTime = datetime.datetime.now().strftime("%H:%M:%S")
            print(strTime)
            speak(strTime + "o'clock")
        
-       elif 'are you still there' in query:
+        elif 'are you still there' in query:
            speak('Of course sir')
        
-       elif 'miss you' in query:
+        elif 'I miss you' in query:
                speak('I miss you too sir')
       
-       elif 'are you there' in query:
+        elif 'are you there' in query:
            speak('Of course sir')
       
-       elif 'melon' in query:
-           speak('sir')
-        
-       elif 'how are you' in query:
-           speak('I am fine sir , how are you')
+        elif 'league of legends' in query:
+           speak("league of legends is opening")
+           lolPath  = "C:\\Riot Games\\League of Legends\\LeagueClient.exe"
+           os.startfile(lolPath)
+      
+        elif 'how are you' in query:
+           speak('I am fine sir , how are you?')
        
-       elif 'fine' in query:
+        elif 'fine' in query:
            speak('Glad to hear that sir')
       
-       elif 'bad' in query:
-           speak('Is there anything I can help, sir') 
+        elif 'bad' in query:
+           speak('Is there anything I can help, sir')
+           speak("Would you like to listen to something sir?")
+           query = takeCommand().lower()
+           if 'yes' in query:
+               speak("what would you like to listen sir?")
+               query = takeCommand().lower()
+               speak("I will open" + query)
+               music(query.split('play')[1])
+           else:
+                speak("If you need anything, I'm here sir") 
       
-       elif 'no thank' in query:
+        elif 'no thank' in query:
            speak('Roger sir') 
       
-       elif 'no thanks' in query:
+        elif 'no thanks' in query:
            speak('Roger sir') 
       
-       elif 'search google' in query:
+        elif 'search google' in query:
            speak('Searching in google...')
            query = query.replace("search google","")
            webbrowser.get(chrome_path).open("https://www.google.com/search?q=" + query)
-       
-       elif 'thank you' in query:
+        elif 'search' in query:
+           speak('Searching in google...')
+           query = query.replace("search","")
+           webbrowser.get(chrome_path).open("https://www.google.com/search?q=" + query)
+        elif 'what is the' in query:
+           query = query.replace("what is the","")
+           speak('I am searching'+query+'in google...')
+           query = query.replace("what is the","")
+           webbrowser.get(chrome_path).open("https://www.google.com/search?q=" + query)
+
+        elif 'thank you' in query:
            speak('whenever you want sir')
       
-       elif 'hello' in query:
+        elif 'hello' in query:
            speak('hello sir')
        
-       elif 'in youtube' in query:
+        elif 'in youtube' in query:
            speak('opening in youtube..')
            query = query.replace("in youtube","")
            webbrowser.get(chrome_path).open("https://www.youtube.com/results?search_query=" + query)
       
-       elif 'system off' in query:
+        elif 'system off' or 'bye' or 'you can go for now' or 'quit' or 'goodbye' or 'exit' in query:
            speak('Goodbye sir')
            break;
        
-       elif 'you can go for now' in query:
-           speak('Goodbye sir')
-           break;
+        elif 'i love you' in query:
+           speak('I love you too sir')
       
-       elif 'bye' in query:
-           speak('Goodbye sir')
-           break;
-      
-       elif 'quit' in query:
-           speak('Goodbye sir')
-           break;
-       
-       elif 'goodbye' in query:
-           speak('Goodbye sir')
-           break;
-      
-       elif 'what\'s your name' in query:
+        elif 'what\'s your name' in query:
            speak("My name is melon sir")
       
-       elif 'when were you born' in query:
+        elif 'when were you born' in query:
            speak('I was born in 16 March , 2020')
       
-       elif 'who is admin' in query:
+        elif 'who is admin' in query:
            speak("I don't know but everybody usually call he BBS ")
       
-       elif 'open code' in query:
+        elif 'open code' in query:
            codePath = "C:\\Users\\berka\\OneDrive\\Masaüstü\\Masaüstü\\melon\\melon.py"
            os.startfile(codePath)
            speak('this is my code')
       
-       elif 'email to' in query:
+        elif 'email to' in query:
             try:
                 speak("What should I say sir")
                 content = takeCommand()
@@ -219,22 +239,21 @@ if __name__ == "__main__":
                 print(e)
                 speak("Sorry my sir. I am not able to send this email")  
       
-       elif 'open linked' in query:
+        elif 'open linked' in query:
             webbrowser.get(chrome_path).open("https://www.linkedin.com/in/berkay-berat-s%C3%B6nmez-4b43181a7/")
       
-       elif 'open github' in query:
+        elif 'open github' in query:
             webbrowser.get(chrome_path).open("https://github.com/berkayberatsonmez") 
       
-       elif 'open binance' in query:
+        elif 'open binance' in query:
             webbrowser.get(chrome_path).open("https://www.binance.com/tr")
       
-       elif 'open website' in query:
+        elif 'open website' in query:
             query = query.replace("open website","")
             speak(query+"is opening")
-            query = query.replace("open website","")
             webbrowser.get(chrome_path).open(query+".com")
       
-       elif 'weather' in query:
+        elif 'weather' in query:
             speak("the weather is " + b + " centigrade"+ " now" )
             if 0<temperature<15:
                 speak("The weather is not bad today, you still be careful sir")
@@ -245,20 +264,28 @@ if __name__ == "__main__":
             else:
                 speak("The weather is hot and nice today, be careful, don't sweat too much sir")
       
-       elif 'are you ready' in query:
+        elif 'are you ready' in query:
             speak("I have already ready sir")        
        
-       elif 'open translate' in query:
-            webbrowser.get(chrome_path).open("https://translate.google.com/")  
+        elif 'open translate' in query:
+            webbrowser.get(chrome_path).open("https://translate.google.com/")
       
-       elif 'system info' in query:
+        elif 'when file change' in query:  
+            print("last modified: %s" % time.ctime(os.path.getmtime(file)))          
+            speak("last modified: %s" % time.ctime(os.path.getmtime(file)))
+
+        elif 'when file create' in query:  
+            print("created: %s" % time.ctime(os.path.getctime(file)))          
+            speak("created: %s" % time.ctime(os.path.getctime(file)))
+     
+        elif 'system info' in query:
             speak('OS Name is: {0}'.format(os_name))
             speak('OS Version is: {0}'.format(os_version))
             speak('CPU is: {0}'.format(proc_info.Name))
             speak('RAM is: ' + str(round(psutil.virtual_memory().total / (1024.0 **3))) + "GigaByte")
             speak('Graphics Card is: {0}'.format(gpu_info.Name))
       
-       elif 'shut down computer' in query:
+        elif 'shut down computer' in query:
             speak("Do you wish to shutdown your computer sir?")
             query = takeCommand().lower()
             if 'yes' in query:
@@ -268,7 +295,7 @@ if __name__ == "__main__":
             else:
                 speak("The shutdown process has been aborted sir.")
       
-       elif 'reboot computer' in query:
+        elif 'reboot computer' in query:
             speak("Do you wish to reboot your computer sir?")
             query = takeCommand().lower()
             if 'yes' in query:
@@ -278,7 +305,7 @@ if __name__ == "__main__":
             else:
                 speak("The reboot process has been aborted sir.")
       
-       elif 'sleep time' in query:
+        elif 'sleep time' in query:
             speak("Do you wish to sleep your computer sir?")
             query = takeCommand().lower()
             if 'yes' in query:
@@ -287,37 +314,58 @@ if __name__ == "__main__":
             else:
                 speak("The sleep process has been aborted sir.")
        
-       elif 'start over yourself' in query:
+        elif 'start over yourself' in query:
             speak("system rebooting")
             wishMe()
       
-       elif 'change file name' in query:     #çalışıyor fakat uzantı sıkıntısı var os.path.splitext() bu kod uzantıyı ayırıyor
-            speak("Be careful, The files should be on the desktop.") 
+        elif 'change file name' in query:
+            speak("Be careful, The files should be in the melonfiles.")
             speak("what is the file extansion")
             query = takeCommand().lower()
-            if 'py' in query:
-                extansion="py"
-            elif 'txt' in query:
-                extansion ="txt"
-            elif 'png' in query:
-                extansion ="png"
-            elif 'jpg' in query:
-                extansion ="jpg"
-            elif 'jpeg' in query:
-                extansion ="jpeg"
-            elif 'mp4' in query:
-                extansion ="mp4"
-            elif 'mp3' in query:
-                extansion ="mp3"
-            elif 'gif' in query:
-                extansion ="gif"
-            elif 'webp' in query:
-                extansion ="webp"
-            elif 'html' in query:
-                extansion ="html"
-            else:
-                speak("sorry sir, ı don't know this extansion")
-    
+            while True:
+                if 'py' in query:
+                    extansion="py"
+                    break
+                elif 'txt' in query:
+                    extansion ="txt"
+                    break
+                elif 'text' in query:
+                    extansion ="txt"
+                    break
+                elif 'png' in query:
+                    extansion ="png"
+                    break
+                elif 'jpg' in query:
+                    extansion ="jpg"
+                    break
+                elif 'images' in query:
+                    extansion ="jpg"
+                    break
+                elif 'jpeg' in query:
+                    extansion ="jpeg"
+                    break
+                elif 'mp4' in query:
+                    extansion ="mp4"
+                    break
+                elif 'video' in query:
+                    extansion ="mp4"
+                    break
+                elif 'mp3' in query:
+                    extansion ="mp3"
+                    break
+                elif 'gif' in query:
+                    extansion ="gif"
+                    break
+                elif 'webp' in query:
+                    extansion ="webp"
+                    break
+                elif 'html' in query:
+                    extansion ="html"   
+                    break 
+                else:
+                    speak("sorry sir, ı don't know this extansion")
+                    speak("what is the file extansion")
+                    query = takeCommand().lower()
             speak("Which file's name will change sir?")
             query = takeCommand().lower()
             if 'melon' in query:
@@ -337,9 +385,181 @@ if __name__ == "__main__":
                 speak("the replacement process is starting..")
                 os.rename(os.path.join(base,firstfilename+"."+extansion), os.path.join(base,secondfilename+"."+extansion))
                 speak("the replacement process is finished..")
-       elif 'countdown' in query:
+
+        elif 'countdown' in query:
            t=5
            while t >= 0:
                speak(t)
                t-=1
                time.sleep(0.1)
+
+        elif 'create new file' in query:
+            speak("Be careful, you need have a file which name is melonfiles in your desktop")
+            speak("what is the file extansion sir")
+            query = takeCommand().lower()
+            while True:
+                if 'py' in query:
+                    extansion="py"
+                    break
+                elif 'txt' in query:
+                    extansion ="txt"
+                    break
+                elif 'text' in query:
+                    extansion ="txt"
+                    break
+                elif 'png' in query:
+                    extansion ="png"
+                    break
+                elif 'images' in query:
+                    extansion ="jpg"
+                    break
+                elif 'jpg' in query:
+                    extansion ="jpg"
+                    break
+                elif 'jpeg' in query:
+                    extansion ="jpeg"
+                    break
+                elif 'mp4' in query:
+                    extansion ="mp4"
+                    break
+                elif 'video' in query:
+                    extansion ="mp4"
+                    break
+                elif 'mp3' in query:
+                    extansion ="mp3"
+                    break
+                elif 'gif' in query:
+                    extansion ="gif"
+                    break
+                elif 'webp' in query:
+                    extansion ="webp"
+                    break
+                elif 'html' in query:
+                    extansion ="html" 
+                    break   
+                else:
+                    speak("sorry sir, ı don't know this extansion")
+                    speak("what is the file extansion")
+                    query = takeCommand().lower()
+            speak("What is the file name sir?")
+            query = takeCommand().lower()
+            newfilename=query  
+            speak("I'm creating a new file.")
+            newfile= open(os.path.join(base,newfilename+"."+extansion,),'a+')
+            speak("Do you want to write anything in this file sir?")
+            query = takeCommand().lower()
+            if 'yes' in query:
+                speak("what would you like me to write sir?")
+                query = takeCommand().lower()
+                newfile.write(query)
+                newfile.close()
+                speak("Would you like me to read what you wrote sir?")
+                query = takeCommand().lower()
+                if 'yes' in query:
+                    f= open(os.path.join(base,newfilename+"."+extansion,),'r')
+                    speak(f.read())
+                    speak("Do you want to add anything in this file sir?")
+                    query = takeCommand().lower()
+                    if 'yes' in query:
+                        speak("what would you like me to write sir?")
+                        query = takeCommand().lower()
+                        newfile.write(query)
+                        newfile.close()
+                        speak("please check your melonfiles in your desktop")
+                    else:
+                        newfile.close()
+                        speak("please check your melonfiles in your desktop")
+                else:  
+                    newfile.close()                  
+                    speak("please check your melonfiles in your desktop")               
+            else:
+                newfile.close()
+                speak("please check your melonfiles in your desktop")
+                
+        elif 'play' in query:
+            speak("If you want to play something please close your browsers but don't worry ı will open a browser for you.")
+            options = webdriver.ChromeOptions()
+            options.add_argument("user-data-dir=C:\\Users\\" + getpass.getuser() + "\\AppData\\Local\\Google\\Chrome\\User Data")
+            driver = webdriver.Chrome("C:\\Users\\berka\\OneDrive\\Masaüstü\\Masaüstü\\melon\\chromedriver.exe", chrome_options=options)
+            def music(song):
+                driver.get("https://www.youtube.com/results?search_query=" + song)
+                delay = 3
+                myElem = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.ID, 'video-title')))
+                driver.find_element_by_css_selector("a[id='video-title']").click()
+                speak(song + " is playing")
+            music(query.split('play')[1])
+
+        elif "am tired" in query:
+           speak('Is there anything I can help, sir')
+           speak("Would you like to listen to something sir?")
+           query = takeCommand().lower()
+           if 'yes' in query: 
+               speak("If you want to play something please close your browsers but don't worry ı will open a browser for you.")
+               options = webdriver.ChromeOptions()
+               options.add_argument("user-data-dir=C:\\Users\\" + getpass.getuser() + "\\AppData\\Local\\Google\\Chrome\\User Data")
+               driver = webdriver.Chrome("C:\\Users\\berka\\OneDrive\\Masaüstü\\Masaüstü\\melon\\chromedriver.exe", chrome_options=options)       
+               speak("what would you like to listen sir?")
+               query = takeCommand().lower()
+               speak("I will open" + query)
+               def music(song):
+                    driver.get("https://www.youtube.com/results?search_query=" + song)
+                    delay = 3
+                    myElem = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.ID, 'video-title')))
+                    driver.find_element_by_css_selector("a[id='video-title']").click()
+                    speak(song + " is playing")
+               music(query.split('play')[1])
+               
+           else:
+               speak("If you need anything, I'm here sir")
+
+        elif 'return to the previous song' in query:       
+            driver.back()
+
+        elif 'turn off sound' in query:       
+            driver.quit()  
+
+        elif 'open clip' in query:       
+            driver.maximize_window()
+
+        elif 'take screenshot' in query:
+            while True:
+                speak("what is the screenshot name sir?")
+                query = takeCommand().lower()
+                time.sleep(3)
+                t=3
+                while t >= 0:
+                    speak(t)
+                    t-=1
+                    time.sleep(0.1)
+                pyautogui.screenshot("C:\\Users\\berka\\OneDrive\\Masaüstü\\melonfiles\\"+query+".png")
+                speak("you can check melon files")
+                break
+        
+        elif 'open calculator' in query:
+            speak("calculator is opening")
+            call(["calc.exe"])
+
+        elif 'open' in query:
+            query = query.replace("open","")
+            speak(query+"is opening")
+            call([query+".exe"])
+
+        elif 'find' in query:
+            query = query.replace("find","")
+            speak(query+"is finding")
+            webbrowser.get(chrome_path).open("https://google.nl/maps/place/"+query+"/&amp;")
+
+        else:
+            speak("Do you need anything else sir?")
+            query = takeCommand().lower()
+            if 'yes' in query:
+                speak("I am listening you sir")
+                continue
+            else:    
+                speak("When you need me, just say melon and wait sir")
+                break
+                 
+    elif 'turn off yourself' in query:
+        speak("if you need me, just run my file.")
+        speak("Goodbye sir.")
+        break       
