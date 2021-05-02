@@ -20,9 +20,9 @@ from selenium.common.exceptions import TimeoutException
 import pyautogui
 from subprocess import call
 
-base= "C:\\Users\\berka\\OneDrive\\Masaüstü\\melonfiles"
+base= "C:\\Users\\berka\\Desktop\\melonfiles\\melonfiles"
 
-file="C:\\Users\\berka\\OneDrive\\Masaüstü\\Masaüstü\\melon\\melon.py"
+file="C:\\Users\\berka\\Desktop\\Masaüstü\\melon\\melon.py"
 
 computer = wmi.WMI()
 computer_info = computer.Win32_ComputerSystem()[0]
@@ -101,7 +101,7 @@ def takeCommand():
             return query
 
 
-if __name__ == "__main__":      # melon commands are here. You can write whatever you want to do to melon.
+if __name__ == "__main__":      # melon commands are here. You can do whatever you want to do to melon.
    wishMe()
 
    while True:
@@ -207,10 +207,30 @@ if __name__ == "__main__":      # melon commands are here. You can write whateve
            query = query.replace("in youtube","")
            webbrowser.get(chrome_path).open("https://www.youtube.com/results?search_query=" + query)
       
-        elif 'system off' or 'bye' or 'you can go for now' or 'quit' or 'goodbye' or 'exit' in query:
+        elif 'system off' in query:
            speak('Goodbye sir')
            break;
        
+        elif 'bye' in query:
+           speak('Goodbye sir')
+           break;
+       
+        elif 'you can go for now' in query:
+           speak('Goodbye sir')
+           break;
+       
+        elif 'quit' in query:
+           speak('Goodbye sir')
+           break;
+       
+        elif 'goodbye' in query:
+           speak('Goodbye sir')
+           break;
+       
+        elif 'exit' in query:
+           speak('Goodbye sir')
+           break;  
+            
         elif 'i love you' in query:
            speak('I love you too sir')
       
@@ -224,7 +244,7 @@ if __name__ == "__main__":      # melon commands are here. You can write whateve
            speak("I don't know but everybody usually call he BBS ")
       
         elif 'open code' in query:
-           codePath = "C:\\Users\\berka\\OneDrive\\Masaüstü\\Masaüstü\\melon\\melon.py"
+           codePath = "C:\\Users\\berka\\Desktop\\Masaüstü\\melon\\melon.py"
            os.startfile(codePath)
            speak('this is my code')
       
@@ -480,7 +500,7 @@ if __name__ == "__main__":      # melon commands are here. You can write whateve
             speak("If you want to play something please close your browsers but don't worry ı will open a browser for you.")
             options = webdriver.ChromeOptions()
             options.add_argument("user-data-dir=C:\\Users\\" + getpass.getuser() + "\\AppData\\Local\\Google\\Chrome\\User Data")
-            driver = webdriver.Chrome("C:\\Users\\berka\\OneDrive\\Masaüstü\\Masaüstü\\melon\\chromedriver.exe", chrome_options=options)
+            driver = webdriver.Chrome("C:\\Users\\berka\\Desktop\\Masaüstü\\melon\\chromedriver.exe", chrome_options=options)
             def music(song):
                 driver.get("https://www.youtube.com/results?search_query=" + song)
                 delay = 3
@@ -490,14 +510,14 @@ if __name__ == "__main__":      # melon commands are here. You can write whateve
             music(query.split('play')[1])
 
         elif "am tired" in query:
-           speak('Is there anything I can help, sir')
+           speak('Is there anything I can help')
            speak("Would you like to listen to something sir?")
            query = takeCommand().lower()
            if 'yes' in query: 
                speak("If you want to play something please close your browsers but don't worry ı will open a browser for you.")
                options = webdriver.ChromeOptions()
                options.add_argument("user-data-dir=C:\\Users\\" + getpass.getuser() + "\\AppData\\Local\\Google\\Chrome\\User Data")
-               driver = webdriver.Chrome("C:\\Users\\berka\\OneDrive\\Masaüstü\\Masaüstü\\melon\\chromedriver.exe", chrome_options=options)       
+               driver = webdriver.Chrome("C:\\Users\\berka\\Desktop\\Masaüstü\\melon\\chromedriver.exe", chrome_options=options)       
                speak("what would you like to listen sir?")
                query = takeCommand().lower()
                speak("I will open" + query)
@@ -507,7 +527,7 @@ if __name__ == "__main__":      # melon commands are here. You can write whateve
                     myElem = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.ID, 'video-title')))
                     driver.find_element_by_css_selector("a[id='video-title']").click()
                     speak(song + " is playing")
-               music(query.split('play')[1])
+               music(query.split()[1])
                
            else:
                speak("If you need anything, I'm here sir")
@@ -531,7 +551,7 @@ if __name__ == "__main__":      # melon commands are here. You can write whateve
                     speak(t)
                     t-=1
                     time.sleep(0.1)
-                pyautogui.screenshot("C:\\Users\\berka\\OneDrive\\Masaüstü\\melonfiles\\"+query+".png")
+                pyautogui.screenshot("C:\\Users\\berka\\Masaüstü\\melonfiles\\"+query+".png")
                 speak("you can check melon files")
                 break
         
@@ -558,7 +578,7 @@ if __name__ == "__main__":      # melon commands are here. You can write whateve
             else:    
                 speak("When you need me, just say melon and wait sir")
                 break
-                 
+                             
     elif 'turn off yourself' in query:
         speak("if you need me, just run my file.")
         speak("Goodbye sir.")
