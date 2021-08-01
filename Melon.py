@@ -19,6 +19,9 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 import pyautogui
 from subprocess import call
+import winshell
+import pyjokes
+
 
 base= "C:\\Users\\berka\\Desktop\\melonfiles\\melonfiles"
 
@@ -56,7 +59,7 @@ def sendEmail(to, content):
     server.ehlo()
     server.starttls()
     server.login('senin mail adresin', 'şifren')
-    server.sendmail('mesajı buraya gir', to, content)
+    server.sendmail('senin mail adresin', to, content)
     server.close()
 
 def wishMe():
@@ -100,16 +103,18 @@ def takeCommand():
                 return "none"
             return query
 
-
 if __name__ == "__main__":      # melon commands are here. You can do whatever you want to do to melon.
    wishMe()
 
    while True:
+       
+      
 
-    query = takeCommand().lower()
-    if 'melon' in query:
+     query = takeCommand().lower()
+     if 'melon' in query:
        speak("How can ı help you sir")
        while True:
+           
         query = takeCommand().lower()
         if 'wikipedia' in query:
            speak('Searching Wikipedia...')
@@ -207,29 +212,9 @@ if __name__ == "__main__":      # melon commands are here. You can do whatever y
            query = query.replace("in youtube","")
            webbrowser.get(chrome_path).open("https://www.youtube.com/results?search_query=" + query)
       
-        elif 'system off' in query:
+        elif 'system off' in query or 'bye' in query or 'you can go for now' in query or 'quit' in query or 'goodbye' in query or 'exit' in query:
            speak('Goodbye sir')
            break;
-       
-        elif 'bye' in query:
-           speak('Goodbye sir')
-           break;
-       
-        elif 'you can go for now' in query:
-           speak('Goodbye sir')
-           break;
-       
-        elif 'quit' in query:
-           speak('Goodbye sir')
-           break;
-       
-        elif 'goodbye' in query:
-           speak('Goodbye sir')
-           break;
-       
-        elif 'exit' in query:
-           speak('Goodbye sir')
-           break;  
             
         elif 'i love you' in query:
            speak('I love you too sir')
@@ -568,6 +553,19 @@ if __name__ == "__main__":      # melon commands are here. You can do whatever y
             query = query.replace("find","")
             speak(query+"is finding")
             webbrowser.get(chrome_path).open("https://google.nl/maps/place/"+query+"/&amp;")
+            
+        elif 'empty recycle' in query:
+            winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
+            speak("Recycle Bin Recycled")
+        
+        elif "where is" in query:
+            query = query.replace("where is", "")
+            location = query
+            speak(query+"is here")
+            webbrowser.open("https://www.google.nl/maps/place/" + location + "")
+        
+        elif 'joke' in query:
+            speak(pyjokes.get_joke())
 
         else:
             speak("Do you need anything else sir?")
@@ -579,7 +577,7 @@ if __name__ == "__main__":      # melon commands are here. You can do whatever y
                 speak("When you need me, just say melon and wait sir")
                 break
                              
-    elif 'turn off yourself' in query:
+     elif 'turn off yourself' in query:
         speak("if you need me, just run my file.")
         speak("Goodbye sir.")
         break       
