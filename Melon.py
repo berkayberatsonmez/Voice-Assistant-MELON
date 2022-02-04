@@ -23,9 +23,9 @@ import winshell
 import pyjokes
 
 
-base= "C:\\Users\\berka\\Desktop\\melonfiles\\melonfiles"
+base= "C:\\Users\\berka\\Desktop\\melonfiles\\melonfiles" #change this part
 
-file="C:\\Users\\berka\\Desktop\\Masaüstü\\melon\\melon.py"
+file="C:\\Users\\berka\\Desktop\\Masaüstü\\melon\\melon.py" #change this part
 
 computer = wmi.WMI()
 computer_info = computer.Win32_ComputerSystem()[0]
@@ -43,7 +43,7 @@ jsonResponse = json.loads(response.text)
 temperature = jsonResponse["main"]["temp"] - 273
 b = str(round(temperature,2))
 
-chrome_path = "C:/Program Files/Google/Chrome/Application/chrome.exe %s"
+chrome_path = "C:/Program Files/Google/Chrome/Application/chrome.exe %s" #change this part
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -107,10 +107,8 @@ if __name__ == "__main__":      # melon commands are here. You can do whatever y
    wishMe()
 
    while True:
-       
-      
-
      query = takeCommand().lower()
+    
      if 'melon' in query:
        speak("How can ı help you sir")
        while True:
@@ -160,7 +158,7 @@ if __name__ == "__main__":      # melon commands are here. You can do whatever y
       
         elif 'league of legends' in query:
            speak("league of legends is opening")
-           lolPath  = "C:\\Riot Games\\League of Legends\\LeagueClient.exe"
+           lolPath  = "C:\\Riot Games\\League of Legends\\LeagueClient.exe" #change this part
            os.startfile(lolPath)
       
         elif 'how are you' in query:
@@ -226,10 +224,10 @@ if __name__ == "__main__":      # melon commands are here. You can do whatever y
            speak('I was born in 16 March , 2020')
       
         elif 'who is admin' in query:
-           speak("I don't know but everybody usually call he BBS ")
+           speak("I don't know but everybody usually call him BBS ")
       
         elif 'open code' in query:
-           codePath = "C:\\Users\\berka\\Desktop\\Masaüstü\\melon\\melon.py"
+           codePath = "C:\\Users\\berka\\Desktop\\Masaüstü\\melon\\melon.py" #change this part
            os.startfile(codePath)
            speak('this is my code')
       
@@ -494,7 +492,7 @@ if __name__ == "__main__":      # melon commands are here. You can do whatever y
                 speak(song + " is playing")
             music(query.split('play')[1])
 
-        elif "am tired" in query:
+        elif "I am tired" in query:
            speak('Is there anything I can help')
            speak("Would you like to listen to something sir?")
            query = takeCommand().lower()
