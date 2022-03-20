@@ -3,12 +3,12 @@ Don't forget to star it ,if you liked it.
 
 MELON Commands
 
-wikipedia --> you can search something in wikipedia. melon can read for you
-open youtube -->youtube will open
-open google -->google will open
-search, search google, what is the,find -->melon search in google whatever you want
-in youtube -->melon will open in youtbe what ever you want
-system oof,bye,quit,goodbye,exit -->melon will close
+wikipedia --> you can search something in wikipedia. melon can read for you \n
+open youtube -->youtube will open \n
+open google -->google will open \n
+search, search google, what is the,find -->melon search in google whatever you want \n
+in youtube -->melon will open in youtbe what ever you want \n
+system oof,bye,quit,goodbye,exit -->melon will close \n
 email to -->before the use that command you have to enter your email information in the code
 open code -->before the use that command you have to change the path in the code
 open (linkedın,github,binance,website) --> you have to change linkedın and github link
